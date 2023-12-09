@@ -33,6 +33,7 @@ class TodoAPI {
             console.log(error);
         }
     }
+
     async deleteOne(id) {
         try {
             const response = await fetch(`http://localhost:4000/tasks/${id}`, {
@@ -69,6 +70,9 @@ class TodoAPI {
         }
     }
 }
+
+const todoAPI = new TodoAPI();
+
 class TodoUI {
     static tasksUl = document.querySelector("ul");
     async renderAll() {
@@ -161,6 +165,7 @@ class TodoUI {
         this.renderAll();
     }
 }
-const todoAPI = new TodoAPI();
+
+const todoUI = new TodoUI();
 
 todoUI.init();
