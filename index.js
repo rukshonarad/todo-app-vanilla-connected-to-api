@@ -33,6 +33,41 @@ class TodoAPI {
             console.log(error);
         }
     }
+    async deleteOne(id) {
+        try {
+            const response = await fetch(`http://localhost:4000/tasks/${id}`, {
+                method: "DELETE"
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    async updateStatus(id, status) {
+        try {
+            const response = await fetch(`http://localhost:4000/tasks/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    status: status
+                })
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 }
 class TodoUI {
     static tasksUl = document.querySelector("ul");
